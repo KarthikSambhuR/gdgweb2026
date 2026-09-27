@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
@@ -10,12 +10,14 @@ import { useDialog } from "@/context/DialogContext";
 import TextLoop from "@/components/ui/TextLoop";
 import { Send, Copy, Check, Sparkles } from "lucide-react";
 import { FaGithub, FaLinkedinIn, FaXTwitter, FaDiscord, FaWhatsapp } from "react-icons/fa6";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function MindMarketContact() {
   const dialog = useDialog();
   const [submitting, setSubmitting] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [mascotSpeech, setMascotSpeech] = useState("Hey! Drop us a note 👋");
+  const [mascotSpeech, setMascotSpeech] = useState("Hey! Drop us a note");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,11 +49,11 @@ export default function MindMarketContact() {
   const handleMascotClick = (e: React.MouseEvent) => {
     fireConfetti(e);
     const quips = [
-      "I'm the chapter mascot! 👋",
-      "We read every note! 📬",
-      "Let's build cool stuff! ✨",
-      "Codelabs over lectures! 💻",
-      "Ready when you are! 🚀",
+      "Official GDG AJCE Mascot",
+      "We read every note carefully",
+      "Let's build cool software",
+      "Codelabs over lectures",
+      "Ready when you are",
     ];
     setMascotSpeech(quips[Math.floor(Math.random() * quips.length)]);
   };
@@ -60,7 +62,7 @@ export default function MindMarketContact() {
     e.preventDefault();
     navigator.clipboard.writeText("gdgajce@gmail.com");
     setCopiedEmail(true);
-    setMascotSpeech("Email copied! 📋");
+    setMascotSpeech("Email copied to clipboard");
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
@@ -69,14 +71,14 @@ export default function MindMarketContact() {
 
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       dialog.alert("Please fill in your name, email, and message.", "Missing Information");
-      setMascotSpeech("Don't forget the required fields! ✍️");
+      setMascotSpeech("Please fill out all required fields");
       return;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       dialog.alert("Please provide a valid email address.", "Invalid Email");
-      setMascotSpeech("Double-check that email! 📬");
+      setMascotSpeech("Double-check that email address");
       return;
     }
 
@@ -94,7 +96,7 @@ export default function MindMarketContact() {
       });
 
       fireConfetti();
-      setMascotSpeech("Woohoo! Dispatched! 🎉");
+      setMascotSpeech("Message dispatched successfully");
       dialog.alert(
         "Your inquiry has been received! Our dispatch desk will get back to you shortly.",
         "Inquiry Sent"
@@ -103,14 +105,61 @@ export default function MindMarketContact() {
     } catch (error) {
       console.error("Error submitting contact form:", error);
       dialog.alert("Could not send right now. Please email gdgajce@gmail.com directly!", "Error");
-      setMascotSpeech("Oops! Try emailing us directly. 💌");
+      setMascotSpeech("Notice: Try emailing us directly");
     } finally {
       setSubmitting(false);
     }
   };
 
+  const contactRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!contactRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Contact Header & Form Reveal
+      gsap.from(".contact-header", {
+        scrollTrigger: {
+          trigger: contactRef.current,
+          start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+
+      gsap.from(".contact-card-box", {
+        scrollTrigger: {
+          trigger: ".contact-card-box",
+          start: "top 85%",
+        },
+        y: 50,
+        scale: 0.97,
+        opacity: 0,
+        duration: 0.8,
+        ease: "back.out(1.3)",
+      });
+
+      // 2. Playful Doodle Arm Wave
+      gsap.to(".noodle-arm-svg", {
+        scrollTrigger: {
+          trigger: contactRef.current,
+          start: "top 90%",
+          end: "bottom 30%",
+          scrub: 1.5,
+        },
+        rotate: 15,
+        y: -30,
+        ease: "none",
+      });
+    }, contactRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="contact-section" className="relative w-full bg-transparent pt-10 sm:pt-14 pb-20 sm:pb-28 px-4 sm:px-6 select-none overflow-hidden">
+    <section ref={contactRef} id="contact-section" className="relative w-full bg-transparent pt-10 sm:pt-14 pb-20 sm:pb-28 px-4 sm:px-6 select-none overflow-hidden">
       
       {/* ========================================================================= */}
       {/* 1. TOP FULL-BLEED TEXT-ROLLING RIBBON (Edge-to-edge, seamless wave)       */}
@@ -143,7 +192,7 @@ export default function MindMarketContact() {
       {/* ========================================================================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <svg
-          className="hidden xl:block absolute -left-10 top-1/2 -translate-y-1/2 w-[340px] h-[340px] opacity-75 drop-shadow-xs"
+          className="noodle-arm-svg hidden xl:block absolute -left-10 top-1/2 -translate-y-1/2 w-[340px] h-[340px] opacity-75 drop-shadow-xs origin-bottom-left"
           viewBox="0 0 320 320"
           fill="none"
         >
@@ -169,13 +218,7 @@ export default function MindMarketContact() {
       <div className="max-w-[900px] mx-auto relative z-10 space-y-8 sm:space-y-10 text-center">
         
         {/* Proper Editorial Section Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="space-y-3.5 max-w-2xl mx-auto"
-        >
+        <div className="contact-header space-y-3.5 max-w-2xl mx-auto">
           {/* Chapter Pill Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-[50px] bg-white border border-[#d5d5d4] text-[13px] font-medium text-[#2c2e2a] shadow-xs">
             <span className="w-2 h-2 rounded-full bg-[#ff705d] animate-pulse" />
@@ -191,16 +234,12 @@ export default function MindMarketContact() {
           <p className="text-sm sm:text-[16px] font-normal text-[#80827f] max-w-lg mx-auto leading-relaxed">
             Have inquiries about workshops, speaker invitations, hackathon partnerships, or chapter tracks? Send our organizing crew a direct message.
           </p>
-        </motion.div>
+        </div>
 
         {/* Stacked Form Card (Enlarged Form Card with Hairline Dividers) */}
         <div className="relative max-w-[560px] sm:max-w-[620px] md:max-w-[660px] mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.65, ease: [0.38, 0.005, 0.215, 1.0] }}
-            className="rounded-[36px] sm:rounded-[40px] bg-white border border-[#e5e1d5] shadow-[0_12px_36px_rgba(0,0,0,0.04)] overflow-hidden text-left"
+          <div
+            className="contact-card-box rounded-[36px] sm:rounded-[40px] bg-white border border-[#e5e1d5] shadow-[0_12px_36px_rgba(0,0,0,0.04)] overflow-hidden text-left"
           >
             <form onSubmit={handleSubmit} className="divide-y divide-[#ece7db]">
               
@@ -269,7 +308,7 @@ export default function MindMarketContact() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="group w-full py-5 sm:py-5.5 bg-[#ff705d] hover:bg-[#ee6350] text-white font-medium text-[16px] sm:text-[17px] transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer active:scale-[0.99]"
+                  className="group w-full py-5 sm:py-5.5 bg-[#4285F4] hover:bg-[#3367D6] text-white font-semibold text-[16px] sm:text-[17px] transition-all flex items-center justify-center gap-2.5 disabled:opacity-50 cursor-pointer active:scale-[0.99] shadow-md shadow-[#4285F4]/20"
                 >
                   <Send className="w-4 h-4" />
                   <span>{submitting ? "Submitting inquiry..." : "Send Message"}</span>
@@ -277,7 +316,7 @@ export default function MindMarketContact() {
                 </button>
               </div>
             </form>
-          </motion.div>
+          </div>
         </div>
 
         {/* Quick Links Below Form */}

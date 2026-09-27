@@ -194,31 +194,36 @@ export default function Onboarding({ user }: { user: User }) {
         { merge: true }
       );
 
-      // Link any prior manual event registrations
+      // Link any prior manual event registrations (run safely in background)
       if (userEmail) {
-        const partsQ = query(
-          collectionGroup(db, "participants"),
-          where("email", "==", userEmail),
-          where("userId", "==", "manual")
-        );
-        const partsSnap = await getDocs(partsQ);
-        await Promise.all(
-          partsSnap.docs.map(docSnap => updateDoc(docSnap.ref, { userId: user.uid }))
-        );
+        try {
+          const partsQ = query(
+            collectionGroup(db, "participants"),
+            where("email", "==", userEmail),
+            where("userId", "==", "manual")
+          );
+          const partsSnap = await getDocs(partsQ);
+          await Promise.all(
+            partsSnap.docs.map(docSnap => updateDoc(docSnap.ref, { userId: user.uid }))
+          );
 
-        // Link any prior manual certificates
-        const certsQ = query(
-          collectionGroup(db, "issuedCertificates"),
-          where("recipientEmail", "==", userEmail),
-          where("userId", "==", "manual")
-        );
-        const certsSnap = await getDocs(certsQ);
-        await Promise.all(
-          certsSnap.docs.map(docSnap => updateDoc(docSnap.ref, { userId: user.uid }))
-        );
+          // Link any prior manual certificates
+          const certsQ = query(
+            collectionGroup(db, "issuedCertificates"),
+            where("recipientEmail", "==", userEmail),
+            where("userId", "==", "manual")
+          );
+          const certsSnap = await getDocs(certsQ);
+          await Promise.all(
+            certsSnap.docs.map(docSnap => updateDoc(docSnap.ref, { userId: user.uid }))
+          );
+        } catch (linkErr) {
+          console.warn("Notice: unable to link prior manual certificates/events:", linkErr);
+        }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Onboarding error:", error);
+      alert(error?.message || "Failed to complete setup. Please check your Firestore rules.");
       setSubmitting(false);
     }
   };

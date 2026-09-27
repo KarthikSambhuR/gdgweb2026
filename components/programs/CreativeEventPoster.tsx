@@ -18,136 +18,159 @@ export function hashPosterSeed(str?: string | null): number {
 // 8 STORYBOOK EVENT POSTER ARTWORKS (DIRECTLY MATCHED TO THE LANDING PAGE)
 // =============================================================================
 
-// 1. Periwinkle Canvas with Hanging Orange Star Character (Gymnastic Bars)
-export function OrangeStarGymnastArt() {
+// 1. Google Cloud Computing Engine & Kubernetes Cluster
+export function CloudKubernetesClusterArt() {
   return (
-    <div className="w-full h-full bg-[#C5D2FF] relative flex items-center justify-center overflow-hidden select-none">
+    <div className="w-full h-full bg-[#E8F0FE] relative flex items-center justify-center overflow-hidden select-none">
       <svg viewBox="0 0 240 180" className="w-[85%] h-[85%] max-w-[260px] drop-shadow-xs" fill="none">
-        {/* Gymnastic Bar Frame (Clean Dark Outline) */}
-        <line x1="30" y1="45" x2="210" y2="45" stroke="#2c2e2a" strokeWidth="4" strokeLinecap="round" />
-        <line x1="45" y1="45" x2="45" y2="175" stroke="#2c2e2a" strokeWidth="3.5" strokeLinecap="round" />
-        <line x1="195" y1="45" x2="195" y2="175" stroke="#2c2e2a" strokeWidth="3.5" strokeLinecap="round" />
-        {/* Base feet */}
-        <line x1="30" y1="175" x2="60" y2="175" stroke="#2c2e2a" strokeWidth="3.5" strokeLinecap="round" />
-        <line x1="180" y1="175" x2="210" y2="175" stroke="#2c2e2a" strokeWidth="3.5" strokeLinecap="round" />
+        {/* Soft Background Grid */}
+        <line x1="20" y1="40" x2="220" y2="40" stroke="#4285F4" strokeWidth="1" strokeOpacity="0.2" strokeDasharray="4,4" />
+        <line x1="20" y1="90" x2="220" y2="90" stroke="#4285F4" strokeWidth="1" strokeOpacity="0.2" strokeDasharray="4,4" />
+        <line x1="20" y1="140" x2="220" y2="140" stroke="#4285F4" strokeWidth="1" strokeOpacity="0.2" strokeDasharray="4,4" />
 
-        {/* Playful Orange 10-Point Starburst Character */}
-        <g transform="translate(120, 95)">
-          {/* Hands gripping the bar */}
-          <ellipse cx="-42" cy="-48" rx="7" ry="6" fill="#FF8343" />
-          <ellipse cx="42" cy="-48" rx="7" ry="6" fill="#FF8343" />
-          {/* Main Star Body */}
+        {/* Central Cloud Node Container */}
+        <g transform="translate(120, 85)">
+          {/* Main White Cloud */}
           <path
-            d="M 0 -42
-               L 13 -22
-               L 36 -32
-               L 35 -8
-               L 52 8
-               L 32 23
-               L 38 46
-               L 15 37
-               L 0 54
-               L -15 37
-               L -38 46
-               L -32 23
-               L -52 8
-               L -35 -8
-               L -36 -32
-               L -13 -22 Z"
-            fill="#FF8343"
+            d="M -50 15 
+               A 22 22 0 0 1 -35 -20 
+               A 32 32 0 0 1 20 -28 
+               A 28 28 0 0 1 52 5 
+               A 20 20 0 0 1 45 25 
+               L -40 25 
+               A 16 16 0 0 1 -50 15 Z"
+            fill="#FFFFFF"
             stroke="#2c2e2a"
             strokeWidth="2.5"
             strokeLinejoin="round"
           />
-          {/* Cute Face (Closed Smiling Eyes + Smile) */}
-          <path d="M -16 -4 Q -11 -9 -6 -4" stroke="#2c2e2a" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M 6 -4 Q 11 -9 16 -4" stroke="#2c2e2a" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M -8 10 Q 0 16 8 10" stroke="#2c2e2a" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-          {/* Rosy Cheeks */}
-          <circle cx="-19" cy="4" r="3.5" fill="#FF5722" opacity="0.4" />
-          <circle cx="19" cy="4" r="3.5" fill="#FF5722" opacity="0.4" />
-        </g>
-      </svg>
-    </div>
-  );
-}
 
-// 2. Sunshine Yellow Canvas with Coral Blossom Hand Balancing Tech Sphere (Volleyball)
-export function CoralHandVolleyballArt() {
-  return (
-    <div className="w-full h-full bg-[#FDF085] relative flex items-center justify-center overflow-hidden select-none">
-      <svg viewBox="0 0 240 180" className="w-[85%] h-[85%] max-w-[260px] drop-shadow-xs" fill="none">
-        {/* Playful Pink/Coral Multi-Lobe Hand / Fan Creature */}
-        <g transform="translate(120, 135)">
-          {/* Left finger 1 */}
-          <path d="M -75 -12 C -85 -30 -60 -45 -48 -26 L -20 5 Z" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-          {/* Left finger 2 */}
-          <path d="M -50 -36 C -60 -65 -30 -75 -18 -48 L 0 5 Z" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-          {/* Center finger */}
-          <path d="M -14 -60 C -14 -90 14 -90 14 -60 L 0 10 Z" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-          {/* Right finger 2 */}
-          <path d="M 18 -48 C 30 -75 60 -65 50 -36 L 0 5 Z" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-          {/* Right finger 1 */}
-          <path d="M 48 -26 C 60 -45 85 -30 75 -12 L 20 5 Z" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-
-          {/* Rounded base body */}
-          <rect x="-65" y="-12" width="130" height="24" rx="12" fill="#F472B6" stroke="#2c2e2a" strokeWidth="2" />
-
-          {/* Cute Face on Hand Body */}
-          <path d="M -14 -8 Q -9 -13 -4 -8" stroke="#2c2e2a" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M 4 -8 Q 9 -13 14 -8" stroke="#2c2e2a" strokeWidth="3" strokeLinecap="round" fill="none" />
-          <path d="M -6 4 Q 0 9 6 4" stroke="#2c2e2a" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-        </g>
-
-        {/* Floating Volleyball / Google Sphere on Top */}
-        <g transform="translate(142, 44)">
-          <circle cx="0" cy="0" r="19" fill="#FFFBEB" stroke="#2c2e2a" strokeWidth="2.5" />
-          <path d="M -13 -13 Q 0 0 -13 13" stroke="#2c2e2a" strokeWidth="2" fill="none" />
-          <path d="M 13 -13 Q 0 0 13 13" stroke="#2c2e2a" strokeWidth="2" fill="none" />
-          <path d="M -19 0 L 19 0" stroke="#2c2e2a" strokeWidth="2" />
-        </g>
-
-        {/* Small Companion Blossom Ball */}
-        <circle cx="160" cy="46" r="6" fill="#F472B6" />
-        <circle cx="125" cy="48" r="5" fill="#F472B6" />
-      </svg>
-    </div>
-  );
-}
-
-// 3. Purple / Lavender Canvas with Tech Racquet & Sparkling Orb
-export function LavenderRacquetArt() {
-  return (
-    <div className="w-full h-full bg-[#D6C7FF] relative flex items-center justify-center overflow-hidden select-none">
-      <svg viewBox="0 0 240 180" className="w-[85%] h-[85%] max-w-[260px] drop-shadow-xs" fill="none">
-        {/* Soft Background Dome Shape */}
-        <path d="M 140 170 L 210 170 C 210 90 140 90 140 170 Z" fill="#C4B5FD" opacity="0.6" />
-
-        {/* Cute Mascot Character */}
-        <g transform="translate(90, 105)">
-          <ellipse cx="0" cy="20" rx="36" ry="42" fill="#8B5CF6" stroke="#2c2e2a" strokeWidth="2.5" />
-          <circle cx="-12" cy="10" r="3.5" fill="#2c2e2a" />
-          <circle cx="12" cy="10" r="3.5" fill="#2c2e2a" />
-          <path d="M -6 22 Q 0 27 6 22" stroke="#2c2e2a" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-          {/* Racquet */}
-          <g transform="translate(38, -12)">
-            <ellipse cx="20" cy="-10" rx="24" ry="28" fill="#FFFBEB" stroke="#2c2e2a" strokeWidth="3" />
-            <line x1="8" y1="12" x2="-4" y2="38" stroke="#2c2e2a" strokeWidth="4" strokeLinecap="round" />
-            <line x1="20" y1="-38" x2="20" y2="18" stroke="#2c2e2a" strokeWidth="1.5" strokeDasharray="3,3" />
-            <line x1="-4" y1="-10" x2="44" y2="-10" stroke="#2c2e2a" strokeWidth="1.5" strokeDasharray="3,3" />
+          {/* Kubernetes Wheel in Center */}
+          <g transform="translate(0, 0)">
+            <circle cx="0" cy="0" r="14" fill="#4285F4" stroke="#2c2e2a" strokeWidth="2" />
+            <circle cx="0" cy="0" r="5" fill="#FFFFFF" />
+            {/* 7 spokes */}
+            {[0, 51.4, 102.8, 154.2, 205.7, 257.1, 308.5].map((deg) => (
+              <line
+                key={deg}
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="-13"
+                stroke="#FFFFFF"
+                strokeWidth="2"
+                transform={`rotate(${deg})`}
+              />
+            ))}
           </g>
+
+          {/* Micro Terminal Badge */}
+          <rect x="-34" y="32" width="68" height="18" rx="6" fill="#2c2e2a" />
+          <circle cx="-24" cy="41" r="2" fill="#34A853" />
+          <line x1="-16" y1="41" x2="20" y2="41" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" />
         </g>
 
-        {/* Floating Glowing Code Ball */}
-        <g transform="translate(175, 55)">
-          <circle cx="0" cy="0" r="14" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="2" />
-          <path d="M -5 -4 L -9 0 L -5 4" stroke="#4285F4" strokeWidth="2" strokeLinecap="round" />
+        {/* Google Cloud Sparkle Orbs */}
+        <circle cx="48" cy="55" r="9" fill="#34A853" stroke="#2c2e2a" strokeWidth="2" />
+        <circle cx="192" cy="115" r="11" fill="#EA4335" stroke="#2c2e2a" strokeWidth="2" />
+        <circle cx="180" cy="45" r="7" fill="#FBBC04" stroke="#2c2e2a" strokeWidth="1.5" />
+      </svg>
+    </div>
+  );
+}
+
+// 2. Flutter & Android Cross-Platform Device Canvas
+export function FlutterAndroidDeviceArt() {
+  return (
+    <div className="w-full h-full bg-[#FEF08A] relative flex items-center justify-center overflow-hidden select-none">
+      <svg viewBox="0 0 240 180" className="w-[85%] h-[85%] max-w-[260px] drop-shadow-xs" fill="none">
+        {/* Floating Smartphone Device */}
+        <g transform="translate(85, 30)">
+          <rect width="65" height="115" rx="14" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="3" />
+          {/* Top Notch */}
+          <rect x="22" y="6" width="21" height="4" rx="2" fill="#2c2e2a" />
+          {/* Screen area */}
+          <rect x="6" y="16" width="53" height="88" rx="8" fill="#F0FDF4" />
+          
+          {/* Flutter Dash / Wings Winglet */}
+          <path d="M 20 40 L 45 40 L 32 55 Z" fill="#02569B" stroke="#2c2e2a" strokeWidth="1.5" />
+          <path d="M 28 58 L 45 78 L 36 78 L 22 62 Z" fill="#0175C2" stroke="#2c2e2a" strokeWidth="1.5" />
+          <path d="M 33 67 L 45 55 L 45 63 L 38 72 Z" fill="#29B6F6" stroke="#2c2e2a" strokeWidth="1.5" />
+        </g>
+
+        {/* Playful Android Bot Peeking */}
+        <g transform="translate(165, 85)">
+          {/* Head dome */}
+          <path d="M -24 0 A 24 24 0 0 1 24 0 Z" fill="#3DDC84" stroke="#2c2e2a" strokeWidth="2.5" />
+          {/* Eyes */}
+          <circle cx="-10" cy="-10" r="2.5" fill="#FFFFFF" />
+          <circle cx="10" cy="-10" r="2.5" fill="#FFFFFF" />
+          {/* Antennas */}
+          <line x1="-14" y1="-18" x2="-20" y2="-28" stroke="#2c2e2a" strokeWidth="2.5" strokeLinecap="round" />
+          <line x1="14" y1="-18" x2="20" y2="-28" stroke="#2c2e2a" strokeWidth="2.5" strokeLinecap="round" />
+          {/* Body */}
+          <rect x="-24" y="6" width="48" height="32" rx="6" fill="#3DDC84" stroke="#2c2e2a" strokeWidth="2.5" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+// 3. Gemini Multimodal Generative AI Studio Canvas
+export function GeminiAIStudioArt() {
+  return (
+    <div className="w-full h-full bg-[#E0E7FF] relative flex items-center justify-center overflow-hidden select-none">
+      <svg viewBox="0 0 240 180" className="w-[85%] h-[85%] max-w-[260px] drop-shadow-xs" fill="none">
+        {/* Multimodal Connection Rays */}
+        <line x1="120" y1="90" x2="55" y2="45" stroke="#818CF8" strokeWidth="2" strokeDasharray="4,4" />
+        <line x1="120" y1="90" x2="190" y2="50" stroke="#818CF8" strokeWidth="2" strokeDasharray="4,4" />
+        <line x1="120" y1="90" x2="60" y2="135" stroke="#818CF8" strokeWidth="2" strokeDasharray="4,4" />
+        <line x1="120" y1="90" x2="185" y2="135" stroke="#818CF8" strokeWidth="2" strokeDasharray="4,4" />
+
+        {/* Central Gemini 4-Point Star */}
+        <g transform="translate(120, 90)">
+          <path
+            d="M 0 -45
+               Q 7 -14 42 0
+               Q 7 14 0 45
+               Q -7 14 -42 0
+               Q -7 -14 0 -45 Z"
+            fill="#4F46E5"
+            stroke="#2c2e2a"
+            strokeWidth="3"
+            strokeLinejoin="round"
+          />
+          {/* Glowing Inner Core */}
+          <circle cx="0" cy="0" r="10" fill="#FFFFFF" />
+          <circle cx="0" cy="0" r="4" fill="#F43F5E" />
+        </g>
+
+        {/* Satellite Data Nodes */}
+        <g transform="translate(55, 45)">
+          <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="2" />
+          <rect x="-7" y="-6" width="14" height="12" rx="2" stroke="#4285F4" strokeWidth="1.8" fill="none" />
+          <circle cx="-2" cy="-2" r="1.5" fill="#4285F4" />
+        </g>
+
+        <g transform="translate(190, 50)">
+          <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="2" />
+          <path d="M -5 -4 L -9 0 L -5 4" stroke="#EA4335" strokeWidth="2" strokeLinecap="round" />
           <path d="M 5 -4 L 9 0 L 5 4" stroke="#34A853" strokeWidth="2" strokeLinecap="round" />
         </g>
 
-        {/* Small floating sparkles */}
-        <circle cx="65" cy="50" r="4" fill="#FFFFFF" />
-        <circle cx="195" cy="115" r="3" fill="#FFFFFF" />
+        <g transform="translate(60, 135)">
+          <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="2" />
+          <line x1="-7" y1="-3" x2="-7" y2="3" stroke="#FBBC04" strokeWidth="2" strokeLinecap="round" />
+          <line x1="-2" y1="-7" x2="-2" y2="7" stroke="#FBBC04" strokeWidth="2" strokeLinecap="round" />
+          <line x1="3" y1="-4" x2="3" y2="4" stroke="#FBBC04" strokeWidth="2" strokeLinecap="round" />
+          <line x1="8" y1="-1" x2="8" y2="1" stroke="#FBBC04" strokeWidth="2" strokeLinecap="round" />
+        </g>
+
+        <g transform="translate(185, 135)">
+          <circle cx="0" cy="0" r="16" fill="#FFFFFF" stroke="#2c2e2a" strokeWidth="2" />
+          <path d="M -4 4 L 4 -4" stroke="#34A853" strokeWidth="2.5" strokeLinecap="round" />
+          <polygon points="1,-6 5,-5 6,-1" fill="#34A853" />
+        </g>
       </svg>
     </div>
   );
@@ -335,9 +358,9 @@ export function CodeMatrixSquircleArt() {
 
 // Master Art List
 export const CREATIVE_POSTER_ARTS = [
-  OrangeStarGymnastArt,
-  CoralHandVolleyballArt,
-  LavenderRacquetArt,
+  CloudKubernetesClusterArt,
+  FlutterAndroidDeviceArt,
+  GeminiAIStudioArt,
   MintCloverBotArt,
   SkyRocketCloudArt,
   GeminiSparkleGalaxyArt,

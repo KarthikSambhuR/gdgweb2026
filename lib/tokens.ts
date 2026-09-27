@@ -67,7 +67,7 @@ export const LABS_TOKENS = {
   // Typography Tokens
   typography: {
     fontFamily: {
-      sans: "var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif)",
+      sans: "var(--font-urbanist, var(--font-sans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif))",
       mono: "var(--font-mono, 'Roboto Mono', 'Fira Code', monospace)",
     },
     tracking: {

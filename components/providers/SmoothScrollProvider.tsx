@@ -3,9 +3,16 @@
 import React, { useEffect } from "react";
 import Lenis from "lenis";
 
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 // Module-level singleton so useBodyScrollLock (and any other hook/utility)
 // can pause/resume Lenis without needing React context.
 let _lenis: Lenis | null = null;
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export function getLenis(): Lenis | null {
   return _lenis;
@@ -48,16 +55,18 @@ export default function SmoothScrollProvider({
 
     _lenis = lenis;
 
-    let rafId: number;
-    function raf(time: number) {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    }
+    // Sync Lenis with GSAP ScrollTrigger
+    lenis.on("scroll", ScrollTrigger.update);
 
-    rafId = requestAnimationFrame(raf);
+    const tickerCallback = (time: number) => {
+      lenis.raf(time * 1000);
+    };
+
+    gsap.ticker.add(tickerCallback);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tickerCallback);
       lenis.destroy();
       _lenis = null;
     };

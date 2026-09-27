@@ -101,20 +101,20 @@ export default function ScrollDrawnPath({ containerRef }: ScrollDrawnPathProps) 
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        {/* 1. Four-Way Design System Gradient (Google Blue -> Coral Red -> Sunshine Yellow -> Fresh Green) */}
+        {/* 1. Four-Way Design System Gradient (Google Blue -> Google Red -> Google Yellow -> Google Green) */}
         <linearGradient id="fourWayBrandGradient" x1="0" y1="0" x2="0" y2="1">
-          {/* Blue Pop: #2ba0ff */}
-          <stop offset="0%" stopColor="#2ba0ff" stopOpacity="1" />
-          <stop offset="22%" stopColor="#2ba0ff" stopOpacity="1" />
-          {/* Coral Pop / Red: #ff705d */}
-          <stop offset="38%" stopColor="#ff705d" stopOpacity="1" />
-          <stop offset="55%" stopColor="#ff705d" stopOpacity="1" />
-          {/* Sunshine Pop / Yellow: #f5e211 */}
-          <stop offset="68%" stopColor="#f5e211" stopOpacity="1" />
-          <stop offset="82%" stopColor="#f5e211" stopOpacity="1" />
-          {/* Fresh Grass / Green: #8ed462 */}
-          <stop offset="93%" stopColor="#8ed462" stopOpacity="1" />
-          <stop offset="100%" stopColor="#8ed462" stopOpacity="1" />
+          {/* Google Blue: #4285F4 */}
+          <stop offset="0%" stopColor="#4285F4" stopOpacity="1" />
+          <stop offset="22%" stopColor="#4285F4" stopOpacity="1" />
+          {/* Google Red: #EA4335 */}
+          <stop offset="38%" stopColor="#EA4335" stopOpacity="1" />
+          <stop offset="55%" stopColor="#EA4335" stopOpacity="1" />
+          {/* Google Yellow: #FBBC04 */}
+          <stop offset="68%" stopColor="#FBBC04" stopOpacity="1" />
+          <stop offset="82%" stopColor="#FBBC04" stopOpacity="1" />
+          {/* Google Green: #34A853 */}
+          <stop offset="93%" stopColor="#34A853" stopOpacity="1" />
+          <stop offset="100%" stopColor="#34A853" stopOpacity="1" />
         </linearGradient>
 
         {/* 2. GPU-Accelerated Tiled Noise Pattern (Zero CPU overhead during scroll) */}

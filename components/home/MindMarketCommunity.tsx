@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Trophy, Award, Users, Flame, ArrowUpRight, Sparkles, Zap, Star } from "lucide-react";
 import GoogleLabsMemberCard from "@/components/cards/GoogleLabsMemberCard";
 import { GDG_EXECOM_2026 } from "@/lib/data/TeamData";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 interface Contributor {
   rank: number;
@@ -71,18 +73,61 @@ export default function MindMarketCommunity() {
     }));
   };
 
+  const communityRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (!communityRef.current) return;
+
+    const ctx = gsap.context(() => {
+      // 1. Reveal Section Header
+      gsap.from(".community-header", {
+        scrollTrigger: {
+          trigger: communityRef.current,
+          start: "top 80%",
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+
+      // 2. Reveal Leaderboard and Side Cards
+      gsap.from(".community-panel", {
+        scrollTrigger: {
+          trigger: ".community-panel",
+          start: "top 80%",
+        },
+        y: 50,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 0.85,
+        ease: "power3.out",
+      });
+
+      // 3. Execom Grid Reveal
+      gsap.from(".execom-grid-item", {
+        scrollTrigger: {
+          trigger: ".execom-grid-item",
+          start: "top 85%",
+        },
+        y: 45,
+        scale: 0.96,
+        opacity: 0,
+        stagger: 0.08,
+        duration: 0.75,
+        ease: "back.out(1.4)",
+      });
+    }, communityRef);
+
+    return () => ctx.revert();
+  }, [execomMembers]);
+
   return (
-    <section className="relative w-full bg-transparent py-20 px-4 sm:px-6 select-none">
+    <section ref={communityRef} className="relative w-full bg-transparent py-20 px-4 sm:px-6 select-none">
       <div className="max-w-[1200px] mx-auto space-y-16">
         
         {/* SECTION HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.75, ease: [0.38, 0.005, 0.215, 1.0] }}
-          className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4"
-        >
+        <div className="community-header flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4">
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] text-xs font-medium text-[#2c2e2a]">
               <span className="w-2 h-2 rounded-full bg-[#ff705d]" />
@@ -95,18 +140,14 @@ export default function MindMarketCommunity() {
           <p className="text-[17px] font-normal text-[#80827f] max-w-md leading-relaxed">
             Our campus community ranks among the most active developer chapters in Kerala. Earn badges, build portfolio solutions, and celebrate peer milestones.
           </p>
-        </motion.div>
+        </div>
 
         {/* 2-COLUMN SPLIT: Leaderboard (Left) + Credential & Solution Challenge (Right) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* LEFT: ARENA LEADERBOARD CARD (50px white card with interactive tabs & cheer) */}
-          <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.8, ease: [0.38, 0.005, 0.215, 1.0] }}
-            className="lg:col-span-7 rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 lg:p-10 flex flex-col justify-between shadow-xs"
+          <div
+            className="community-panel lg:col-span-7 rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 lg:p-10 flex flex-col justify-between shadow-xs"
           >
             <div className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -121,33 +162,36 @@ export default function MindMarketCommunity() {
                 </div>
 
                 {/* Interactive Highlights Pill Selector */}
-                <div className="flex items-center bg-[#f5f1e4] p-1 rounded-[50px] border border-[#d5d5d4] self-start sm:self-auto overflow-x-auto no-scrollbar shrink-0">
+                <div className="flex items-center bg-[#f5f1e4] p-1 rounded-[50px] border border-[#d5d5d4] self-start sm:self-auto overflow-x-auto no-scrollbar shrink-0 gap-1">
                   <button
                     type="button"
                     onClick={() => setActiveTab("xp")}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
                       activeTab === "xp" ? "bg-white text-[#2c2e2a] shadow-xs" : "text-[#80827f] hover:text-[#2c2e2a]"
                     }`}
                   >
-                    Top XP ⚡
+                    <Zap className="w-3.5 h-3.5 text-[#f59e0b]" />
+                    <span>Top XP</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab("streaks")}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
                       activeTab === "streaks" ? "bg-white text-[#2c2e2a] shadow-xs" : "text-[#80827f] hover:text-[#2c2e2a]"
                     }`}
                   >
-                    Streaks 🔥
+                    <Flame className="w-3.5 h-3.5 text-[#ff705d]" />
+                    <span>Streaks</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => setActiveTab("badges")}
-                    className={`px-3 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold transition cursor-pointer whitespace-nowrap ${
                       activeTab === "badges" ? "bg-white text-[#2c2e2a] shadow-xs" : "text-[#80827f] hover:text-[#2c2e2a]"
                     }`}
                   >
-                    Badges 🎖️
+                    <Award className="w-3.5 h-3.5 text-[#2ba0ff]" />
+                    <span>Badges</span>
                   </button>
                 </div>
               </div>
@@ -191,10 +235,11 @@ export default function MindMarketCommunity() {
                           <button
                             type="button"
                             onClick={(e) => handleCheer(c.name, e)}
-                            className="px-2.5 py-1 rounded-full bg-white hover:bg-[#8ed462] border border-[#d5d5d4] text-[11px] font-medium text-[#2c2e2a] transition active:scale-95 cursor-pointer shadow-xs"
+                            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white hover:bg-[#8ed462] border border-[#d5d5d4] text-[11px] font-medium text-[#2c2e2a] transition active:scale-95 cursor-pointer shadow-xs"
                             title="Cheer this student!"
                           >
-                            👏 {cheers[c.name] || 0}
+                            <Sparkles className="w-3 h-3 text-[#ff705d]" />
+                            <span>{cheers[c.name] || 0}</span>
                           </button>
                         </div>
                       </div>
@@ -217,18 +262,14 @@ export default function MindMarketCommunity() {
                 Live Sync via Firestore
               </span>
             </div>
-          </motion.div>
+          </div>
 
           {/* RIGHT: CREDENTIALS & SOLUTION CHALLENGE CARDS */}
           <div className="lg:col-span-5 flex flex-col gap-8">
             
             {/* CARD 1: VERIFIED SKILL BADGES */}
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.38, 0.005, 0.215, 1.0] }}
-              className="rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 flex flex-col justify-between flex-1 shadow-xs"
+            <div
+              className="community-panel rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 flex flex-col justify-between flex-1 shadow-xs"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -267,15 +308,11 @@ export default function MindMarketCommunity() {
                   <ArrowUpRight className="w-4 h-4 text-[#80827f]" />
                 </Link>
               </div>
-            </motion.div>
+            </div>
 
             {/* CARD 2: GOOGLE SOLUTION CHALLENGE */}
-            <motion.div
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.38, 0.005, 0.215, 1.0] }}
-              className="rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 flex flex-col justify-between flex-1 shadow-xs"
+            <div
+              className="community-panel rounded-[50px] bg-[#ffffff] border border-[#d5d5d4] p-6 sm:p-8 flex flex-col justify-between flex-1 shadow-xs"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -306,7 +343,7 @@ export default function MindMarketCommunity() {
                   Amal Jyothi Chapter
                 </span>
               </div>
-            </motion.div>
+            </div>
 
           </div>
         </div>
@@ -340,11 +377,12 @@ export default function MindMarketCommunity() {
           {/* 4 Featured Google Labs Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {execomMembers.slice(0, 4).map((member, idx) => (
-              <GoogleLabsMemberCard
-                key={member.username || idx}
-                member={member}
-                index={idx}
-              />
+              <div key={member.username || idx} className="execom-grid-item">
+                <GoogleLabsMemberCard
+                  member={member}
+                  index={idx}
+                />
+              </div>
             ))}
           </div>
         </div>

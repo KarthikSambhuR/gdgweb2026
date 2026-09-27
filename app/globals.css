@@ -58,28 +58,23 @@
 body {
   background-color: #f5f1e4;
   color: #2c2e2a;
-  font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-urbanist), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   overflow-x: hidden;
 }
 
-/* MINDMARKET DISPLAY TYPOGRAPHY (Inter at Extreme Scale) */
+/* DISPLAY TYPOGRAPHY (Urbanist) */
 .font-display-hero {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 700;
   line-height: 0.95;
-  letter-spacing: -0.06em;
-}
-
-.font-heading-lg {
-  font-family: var(--font-inter), sans-serif;
-  font-weight: 500;
-  line-height: 1.15;
   letter-spacing: -0.04em;
 }
 
-/* NO SHADOWS OR GRADIENTS — MINDMARKET ELEVATION BY CREAM-TO-WHITE SHIFT */
-*, *::before, *::after {
-  box-shadow: none !important;
+.font-heading-lg {
+  font-family: var(--font-urbanist), sans-serif;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
 }
 
 /* Hairline border utility */
